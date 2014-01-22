@@ -11,17 +11,23 @@ namespace Sjerrul.Utilities.Accessibility
         public string Read(decimal number)
         {
             if (number == 0)
+            {
                 return "Zero";
+            }
+               
             bool isNegative = false;
             if (number < 0)
             {
                 isNegative = true;
                 number = Math.Abs(number);
             }
+
             decimal integerPart = decimal.Floor(number);
             List<int> thousandsList = new List<int>();
             for (int i = 1; i <= Convert.ToInt32(Math.Ceiling(Convert.ToDouble(integerPart.ToString().Length) / 3)); i++)
+            {
                 thousandsList.Add(GetThousands(integerPart, i));
+            }               
 
             StringBuilder output = new StringBuilder();
 

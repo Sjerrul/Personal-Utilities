@@ -28,5 +28,27 @@ namespace Sjerrul.Utilities.Tests.Extentions
 
             Assert.AreEqual(expected, actual.Value);
         }
+
+        [TestMethod]
+        public void ToInitials_ValidString_ShouldReturnValidValue()
+        {
+            string s = "ABC";
+
+            string expected = "A.B.C";
+            string actual = s.ToInitials();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ToInitials_ValidStringWithPeriods_ShouldReturnValidValue()
+        {
+            string s = "AB.C";
+
+            string expected = "A.B.C";
+            string actual = s.ToInitials();
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

@@ -1,0 +1,6 @@
+﻿@model DropdownViewmodel
+
+@if (Model.Items != null)
+{ 
+    @Html.DropDownListFor(x => x.SelectedId, new SelectList(Model.Items, "Value", "Text", Model.SelectedId))
+}

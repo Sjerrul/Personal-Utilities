@@ -8,7 +8,7 @@ namespace Sjerrul.Utilities.Accessibility
 {
     public class NumberReader
     {
-        public string Read(decimal number)
+        public static string Read(decimal number)
         {
             if (number == 0)
             {
@@ -22,7 +22,7 @@ namespace Sjerrul.Utilities.Accessibility
                 number = Math.Abs(number);
             }
 
-            decimal integerPart = decimal.Floor(number);
+            decimal integerPart = decimal.Truncate(number);
             List<int> thousandsList = new List<int>();
             for (int i = 1; i <= Convert.ToInt32(Math.Ceiling(Convert.ToDouble(integerPart.ToString().Length) / 3)); i++)
             {
@@ -112,13 +112,28 @@ namespace Sjerrul.Utilities.Accessibility
                     output.Append(", ");
                 }
             }
+
+            decimal fractions = decimal.Subtract(number, integerPart);
+            if (fractions != 0)
+            {
+                output.Append("Point ");
+
+                string fractional = fractions.ToString().Substring(2);
+
+                foreach (char c in fractional)
+                {
+                    output.Append(ReadOneDigit(Int32.Parse(c.ToString())) + " ");
+                }
+            }
+
             string allOutput = (isNegative ? "Negative " : "") + output.ToString().Trim();
+
             if (allOutput.EndsWith(","))
                 allOutput = allOutput.Substring(0, allOutput.Length - 1);
             return allOutput;
         }
 
-        protected string ReadThreeDigits(int number)
+        protected static string ReadThreeDigits(int number)
         {
             StringBuilder output = new StringBuilder();
 
@@ -225,7 +240,7 @@ namespace Sjerrul.Utilities.Accessibility
             return output.ToString().Trim();
         }
 
-        protected int GetDigit(decimal number, int index)
+        protected static int GetDigit(decimal number, int index)
         {
             number = Math.Abs(number);
             var output = decimal.Floor(
@@ -239,7 +254,7 @@ namespace Sjerrul.Utilities.Accessibility
             return Convert.ToInt32(output);
         }
 
-        protected int GetThousands(decimal number, int index)
+        protected static int GetThousands(decimal number, int index)
         {
             number = Math.Abs(number);
             int output = Convert.ToInt32(
@@ -256,7 +271,7 @@ namespace Sjerrul.Utilities.Accessibility
             return output;
         }
 
-        protected string ReadOneDigit(int digit)
+        protected static string ReadOneDigit(int digit)
         {
             switch (digit)
             {

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Accessibility\NumberReaderTests.cs" />
     <Compile Include="AlphabetTests.cs" />
+    <Compile Include="Collections\StaqueTests.cs" />
     <Compile Include="Extentions\IntegerExtentionsTests.cs" />
     <Compile Include="Extentions\ObjectExtentionsTests.cs" />
     <Compile Include="Extentions\IEnumerableExtensionsTests.cs" />
